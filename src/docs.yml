@@ -1,0 +1,99 @@
+swagger: '2.0'
+info:
+  description: |
+    This is a CodeIgniter Cookie Decryptor microservice. The app was written to connect modern frameworks' session solutions with legacy CodeIgniter Cookie session.
+    As an author of the app I did my best to provide full compatibile API.
+    But if you find any problems do not hesitate to submit an issue.
+
+    Roadmap:
+      1.0.0 - simple cookie encoding & decoding endpoints
+      1.1.0 - support for all attributes like domain matching, last activity etc. new options must be added as a new enpoints to keep BC
+  version: 1.0.0-alpha
+  title: CI Cookie Decryptor
+  termsOfService: 'https://michal.kruczek.it/'
+  contact:
+    email: opensource@kruczek.it
+  license:
+    name: MIT
+host: decryptor.kruczek.it
+basePath: /v1
+schemes:
+  - https
+paths:
+  /encode:
+    post:
+      summary: Encode your cookie data
+      operationId: encode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/EncodeRequest'
+      responses:
+        '400':
+          description: Bad Request
+  /decode:
+    post:
+      summary: Decode your cookie data
+      operationId: decode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DecodeRequest'
+      responses:
+        '400':
+          description: Bad Request
+        '200':
+          description: Returns decoded data as a JSON object
+          schema:
+            type: array
+            items: {}
+definitions:
+  Configuration:
+    type: object
+    properties:
+      sess_encrypt_cookie:
+        type: boolean
+        default: false
+      sess_cookie_name:
+        type: string
+        default: 'ci_session'
+      cookie_prefix:
+        type: string
+        default: ''
+      encryption_key:
+        type: string
+        default: ''
+  EncodeRequest:
+    type: object
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        items: {}
+      config:
+        $ref: '#/definitions/Configuration'
+  DecodeRequest:
+    type: object
+    required:
+      - cookie
+    properties:
+      cookie:
+        type: string
+      config:
+        $ref: '#/definitions/Configuration'
+externalDocs:
+  description: More details can be found in CodeIgniter source code
+  url: 'https://github.com/bcit-ci/CodeIgniter/tree/develop/system/libraries/Session'
