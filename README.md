@@ -1,7 +1,7 @@
-# CI Cookie Decryptor
+# CodeIgniter Cookie Decryptor
 
 This is a CodeIgniter Session Decryptor microservice. The app was written to connect modern frameworks' session solutions with legacy CodeIgniter Cookie session.
-As an author of the app I did my best to provide full compatibile API.
+As an author of the app, I did my best to provide full compatible API.
 But if you find any problems do not hesitate to submit an issue.
 
 Release plan:
