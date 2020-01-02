@@ -8,6 +8,9 @@ cache:
 
 php:
     - 5.6
+    - 7.2
+    - 7.3
+    - 7.4
 
 install:
     - composer self-update
